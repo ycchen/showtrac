@@ -11,11 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802144557) do
+ActiveRecord::Schema.define(version: 20130805201751) do
 
   create_table "charges", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "customers", force: true do |t|
+    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "mobile"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zipcode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +58,36 @@ ActiveRecord::Schema.define(version: 20130802144557) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "payment_types", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", force: true do |t|
+    t.integer  "sale_id"
+    t.integer  "payment_type_id"
+    t.date     "payment_date"
+    t.decimal  "amount",          precision: 8, scale: 2, default: 0.0
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sales", force: true do |t|
+    t.integer  "dog_id"
+    t.integer  "customer_id"
+    t.date     "sale_date"
+    t.decimal  "sale_price",  precision: 8, scale: 2, default: 0.0
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sales", ["customer_id"], name: "index_sales_on_customer_id"
+  add_index "sales", ["dog_id"], name: "index_sales_on_dog_id"
 
   create_table "show_entries", force: true do |t|
     t.integer  "dog_id"

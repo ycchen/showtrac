@@ -142,3 +142,17 @@ $ rails g migration add_show_entry_id_to_dog_expense show_entry:references
 -- Adding sum to view in particular column
 <%= @dog.dog_expenses.map(&:amount).sum %>
 <%= @dog.show_entries.map(&:points).sum %>
+
+== Generate customer model
+$ rails g scaffold customer name:string first_name:string last_name:string email:string phone:string mobile:string address:string city:string zipcode:string
+
+== Generate payment_type model
+$ rails g scaffold payment_type name:string description:text
+
+== Generate sale model
+$ rails g scaffold sale dog:references customer:references sale_date:date sale_price:decimal note:text
+
+== Generate payment model
+$ rails g scaffold payment sale:references payment_type:references payment_date:date amount:decimal note:text
+
+

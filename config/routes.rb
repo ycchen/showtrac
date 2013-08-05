@@ -1,4 +1,12 @@
 Showtrac::Application.routes.draw do
+  resources :payments
+
+  resources :sales
+
+  resources :payment_types
+
+  resources :customers
+
   resources :dog_expenses
 
   resources :charges
