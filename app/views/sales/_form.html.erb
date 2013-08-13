@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :dog %><br>
-    <%= f.text_field :dog %>
+    <%= f.select(:dog_id, Dog.all.map{|d|[d.name, d.id]}, :include_blank => 'Select a Dog') %>
   </div>
   <div class="field">
     <%= f.label :customer %><br>
-    <%= f.text_field :customer %>
+    <%= f.select(:customer_id, Customer.all.map{|c| [c.name, c.id]}, :include_blank => 'Select a Customer') %>
   </div>
   <div class="field">
     <%= f.label :sale_date %><br>

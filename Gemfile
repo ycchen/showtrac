@@ -34,7 +34,8 @@ end
 gem 'bcrypt-ruby', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 
 gem 'bootstrap-sass-rails'  	# bootstrap framework
-
+gem 'carrierwave'				# upload file gem
+gem 'nested_form'				# Use neted_form gem
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'

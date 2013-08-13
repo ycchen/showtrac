@@ -152,7 +152,76 @@ $ rails g scaffold payment_type name:string description:text
 == Generate sale model
 $ rails g scaffold sale dog:references customer:references sale_date:date sale_price:decimal note:text
 
+== Generate payment_status model
+$ rails g scaffold payment_status name:string note:text
+
+
 == Generate payment model
-$ rails g scaffold payment sale:references payment_type:references payment_date:date amount:decimal note:text
+$ rails g scaffold payment sale:references payment_type:references payment_status:references payment_date:date amount:decimal note:text
 
+== Generate photo model
+$ rails g scaffold photo dog:references name:string data:binary filename:string mime_type:string
+# cannot make it work so it will remove it later
+$ rails destroy model photo  # this removed migrate script, models and test files
+$ rails destroy controller photos # this removed controller, helpers and assests photos related files
 
+== Install CarrierWave gem for upload file
+-- Add gem 'carrierwave' to Gemfile
+https://github.com/carrierwaveuploader/carrierwave/wiki
+
+https://github.com/jnicklas/carrierwave-example-app/blob/master/app/views/users/_form.html.erb
+
+1. generate uploader Avatar
+$ rails g uploader Avatar  # this will give you a file in app/uploaders/avatar_uploader.rb
+
+2. generate user model
+$ rails g scaffold user name:string email:string avatar:string
+
+3. update model/user.rb to add following code
+	mount_uploader :avatar, AvatarUploader # this is to point :avatar column to use AvatarUploader class
+
+4. modified views/user/_form.html.erb to add 
+<% form_for @user, :html => { :multipart => true } do |f| %>
+<p><%= f.label :name %><br /><%= f.text_field :name %></p>
+<p><%= f.label :email %><br /><%= f.text_field :email %></p>
+<p>
+  <%= f.label :avatar, "Upload local file:" %><br />
+  <%= f.file_field :avatar %>
+</p>
+<p><%= f.submit "Submit" %></p>
+<% end %>
+
+== Multiple files upolad with carrierwave and nested_form
+1. add nested_form to Gemfile
+gem 'nested_form'
+
+-- install nested_form
+$ rails g nested_form:install
+
+-- updated assets\javascripts\application.js to add nested_form js
+//= require jquery_nested_form
+
+-- generate picture model
+$ rails g model picture attachable:reference file:string
+
+-- modified db\migrate\xxxx_create_pictures.rb
+modified line below to add :polymorphic => true
+t.references :attachable, index: true, :polymorphic => true
+
+$ rake db:migrate
+
+-- generate uploader from carrierwave gem
+$ rails generate uploader file
+
+-- update relationship between dog and picture models
+
+-- models\picture.rb
+belongs_to :dog, polymorphic: true
+mount_uploader :file, FileUploader
+
+-- models\dog.rb
+has_many :pictures, :as => :attachable, :dependent => :destroy
+accepts_nested_attributes_for :pictures, :allow_destroy => true
+
+-- update controllers\dog.rb dog_params method
+added :pictures_attributes => [:id, :file, '_destroy'] to the permit()

@@ -1,4 +1,8 @@
 Showtrac::Application.routes.draw do
+  resources :photos
+
+  resources :payment_statuses
+
   resources :payments
 
   resources :sales

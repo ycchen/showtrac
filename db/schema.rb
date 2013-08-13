@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805201751) do
+ActiveRecord::Schema.define(version: 20130812200817) do
 
   create_table "charges", force: true do |t|
     t.string   "name"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 20130805201751) do
     t.datetime "updated_at"
   end
 
+  create_table "payment_statuses", force: true do |t|
+    t.string   "name"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "payment_types", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -69,12 +76,23 @@ ActiveRecord::Schema.define(version: 20130805201751) do
   create_table "payments", force: true do |t|
     t.integer  "sale_id"
     t.integer  "payment_type_id"
+    t.integer  "payment_status_id"
     t.date     "payment_date"
-    t.decimal  "amount",          precision: 8, scale: 2, default: 0.0
+    t.decimal  "amount",            precision: 8, scale: 2, default: 0.0
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", force: true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pictures", ["attachable_id", "attachable_type"], name: "index_pictures_on_attachable_id_and_attachable_type"
 
   create_table "sales", force: true do |t|
     t.integer  "dog_id"
