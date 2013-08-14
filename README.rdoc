@@ -240,3 +240,77 @@ Add :pictures_attributes => [:id, :file, '_destroy'] to the permit()
 
 - Update views\show_entries\show.html.erb to show upload file in image_tag
 
+-- Add payment form on Sale show page
+
+- update config\routes.rb group by sale and payment resources
+resources :sales do
+	resources :payments
+end
+
+By nested resources like that it will create routes below
+	           sales GET    /sales(.:format)                            sales#index
+	                 POST   /sales(.:format)                            sales#create
+	        new_sale GET    /sales/new(.:format)                        sales#new
+	       edit_sale GET    /sales/:id/edit(.:format)                   sales#edit
+	            sale GET    /sales/:id(.:format)                        sales#show
+	                 PATCH  /sales/:id(.:format)                        sales#update
+	                 PUT    /sales/:id(.:format)                        sales#update
+	                 DELETE /sales/:id(.:format)                        sales#destroy
+	   sale_payments GET    /sales/:sale_id/payments(.:format)          payments#index
+	                 POST   /sales/:sale_id/payments(.:format)          payments#create
+	new_sale_payment GET    /sales/:sale_id/payments/new(.:format)      payments#new
+   edit_sale_payment GET    /sales/:sale_id/payments/:id/edit(.:format) payments#edit
+	    sale_payment GET    /sales/:sale_id/payments/:id(.:format)      payments#show
+	                 PATCH  /sales/:sale_id/payments/:id(.:format)      payments#update
+	                 PUT    /sales/:sale_id/payments/:id(.:format)      payments#update
+	                 DELETE /sales/:sale_id/payments/:id(.:format)      payments#destroy
+
+-- Update navigation and remove payment_path
+
+-- Update views\sales\show.html.erb to add payment form as partial template
+<%= render :partial => 'payments/form' %> 
+
+-- update view\payments\_form.html.erb
+<%= form_for([@sale, @sale.payments.build]) do |f| %>
+
+-- update controllers\payments_controller.rb create method
+def create
+	@sale = Sale.find(params[:sale_id])
+	@payment = @sale.payments.create!(payment_params)
+
+	#make sure to direct back to sales show page after saved the new payment
+end
+
+-- added hid and show function to add payment on sales\show.html.erb page
+
+- added .flip and .panel css in application.css
+.flip{
+	margin: 0px;
+    padding: 5px;
+    text-align: center;
+    background: #ddd;
+    border: solid 1px #fff;
+}
+.panel{
+    display: none;
+}
+
+- updated javascripts\sale.js.coffe
+$ ->
+	$(".flip").click ->
+		$(".panel").slideToggle("slow")
+
+
+- updated views\sales\show.html.erb
+<p class="flip">Add Payment</p>
+<div class="panel">
+	<h3>Add Payment</h3>
+    <%= render 'payments/form' %>
+</div>
+
+--Update relationship between sale and payment to make sure the dependent option is set to destroy
+
+- models\sale.rb
+ has_many :payments, :dependent => :destroy
+
+- Added show dog photos on the sale\show.html.erb page

@@ -3,9 +3,11 @@ Showtrac::Application.routes.draw do
 
   resources :payment_statuses
 
-  resources :payments
+  # resources :payments
 
-  resources :sales
+  resources :sales do
+    resources :payments
+  end
 
   resources :payment_types
 

@@ -30,7 +30,7 @@
                   <td><%= sale.dog.pictures.size %></td>
                   <td><%= link_to 'Show', sale %></td>
                   <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
-                  <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure(this action will also delete assoicated payments ) ?' } %></td>
                 </tr>
               <% end %>
             </tbody>

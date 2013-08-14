@@ -3,7 +3,9 @@
     <div class="span12">
       <div class="grey-box">
       <p id="notice"><%= notice %></p>
-
+      <% @sale.dog.pictures.each do |pic| %>
+        <%= image_tag(pic.file.url, heigh: 200, width: 200) %>
+      <% end %>
       <p>
         <strong>Dog:</strong>
         <%= @sale.dog.name %>
@@ -43,6 +45,14 @@
         <% end %>
         </table>
       </p>
+
+      <p class="flip">Add Payment</p>
+
+      <div class="panel">
+        <h3>Add Payment</h3>
+        <%= render 'payments/form' %>
+      </div>
+
       <%= link_to 'Edit', edit_sale_path(@sale) %> |
       <%= link_to 'Back', sales_path %>
       </div>

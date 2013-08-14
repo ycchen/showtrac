@@ -131,3 +131,13 @@ body {
 .td-text-right{
 	text-align: right;
 }
+.flip{
+	margin: 0px;
+    padding: 5px;
+    text-align: center;
+    background: #ddd;
+    border: solid 1px #fff;
+}
+.panel{
+    display: none;
+}
