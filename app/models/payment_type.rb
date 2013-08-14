@@ -1,3 +1,3 @@
 class PaymentType < ActiveRecord::Base
-	has_many :payments
+	belongs_to :payment
 end

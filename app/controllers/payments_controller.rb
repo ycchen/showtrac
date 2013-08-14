@@ -25,7 +25,7 @@ class PaymentsController < ApplicationController
   # POST /payments.json
   def create
     @payment = Payment.new(payment_params)
-
+    # render @payment.inspect
     respond_to do |format|
       if @payment.save
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
@@ -69,6 +69,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:sale, :payment_type, :payment_date, :payment_status, :amount, :note)
+      params.require(:payment).permit(:sale_id, :payment_type_id, :payment_date, :payment_status_id, :amount, :note)
     end
 end

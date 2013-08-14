@@ -10,6 +10,7 @@
                 <th>Sale</th>
                 <th>Payment type</th>
                 <th>Payment date</th>
+                <th>Payment status</th>
                 <th>Amount</th>
                 <th>Note</th>
                 <th></th>
@@ -21,10 +22,11 @@
             <tbody>
               <% @payments.each do |payment| %>
                 <tr>
-                  <td><%= payment.sale %></td>
-                  <td><%= payment.payment_type %></td>
+                  <td><%= payment.sale.dog.call_name %></td>
+                  <td><%= payment.payment_type.name %></td>
                   <td><%= payment.payment_date %></td>
-                  <td><%= payment.amount %></td>
+                  <td><%= payment.payment_status.name %></td>
+                  <td><%= number_to_currency(payment.amount, :locale=>'zh-TW')%></td>
                   <td><%= payment.note %></td>
                   <td><%= link_to 'Show', payment %></td>
                   <td><%= link_to 'Edit', edit_payment_path(payment) %></td>

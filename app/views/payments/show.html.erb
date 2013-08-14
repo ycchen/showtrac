@@ -6,12 +6,15 @@
 
       <p>
         <strong>Sale:</strong>
-        <%= @payment.sale %>
+        <%= @payment.sale.dog.name %>
       </p>
-
       <p>
         <strong>Payment type:</strong>
-        <%= @payment.payment_type %>
+        <%= @payment.payment_type.name %>
+      </p>
+      <p>
+        <strong>Payment status:</strong>
+        <%= @payment.payment_status.name %>
       </p>
 
       <p>
@@ -21,7 +24,7 @@
 
       <p>
         <strong>Amount:</strong>
-        <%= @payment.amount %>
+        <%= number_to_currency(@payment.amount, :locale => 'zh-TW')%>
       </p>
 
       <p>

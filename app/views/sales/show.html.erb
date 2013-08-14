@@ -6,12 +6,12 @@
 
       <p>
         <strong>Dog:</strong>
-        <%= @sale.dog %>
+        <%= @sale.dog.name %>
       </p>
 
       <p>
         <strong>Customer:</strong>
-        <%= @sale.customer %>
+        <%= @sale.customer.name %>
       </p>
 
       <p>
@@ -21,7 +21,7 @@
 
       <p>
         <strong>Sale price:</strong>
-        <%= @sale.sale_price %>
+        <%= number_to_currency(@sale.sale_price, :locale=>'zh-TW') %>
       </p>
 
       <p>
@@ -29,6 +29,20 @@
         <%= @sale.note %>
       </p>
 
+      <p>
+        <strong>Payment(s):</strong>
+        <table class="table table-strped">
+        <% @sale.payments.each do |pay| %>
+          <tr>
+            <td><%= pay.payment_date %></td>
+            <td><%= pay.payment_type.name %></td>
+            <td><%= number_to_currency(pay.amount, :locale => 'zh-TW') %></td>
+            <td><%= pay.payment_status.name %></td>
+            <td><%= pay.note %></td>
+          </tr>
+        <% end %>
+        </table>
+      </p>
       <%= link_to 'Edit', edit_sale_path(@sale) %> |
       <%= link_to 'Back', sales_path %>
       </div>

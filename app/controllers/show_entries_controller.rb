@@ -69,6 +69,6 @@ class ShowEntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def show_entry_params
-      params.require(:show_entry).permit(:dog_id, :show_id, :entry_fee, :handling_fee, :points, :title, :show_date, :expense, :reg_class, :judge)
+      params.require(:show_entry).permit(:dog_id, :show_id, :entry_fee, :handling_fee, :points, :title, :show_date, :expense, :reg_class, :judge, :pictures_attributes => [:id, :file, '_destroy'])
     end
 end

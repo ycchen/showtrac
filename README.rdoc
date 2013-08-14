@@ -225,3 +225,18 @@ accepts_nested_attributes_for :pictures, :allow_destroy => true
 
 -- update controllers\dog.rb dog_params method
 added :pictures_attributes => [:id, :file, '_destroy'] to the permit()
+
+/* Add image upload to show_entry model */
+
+-- Update relationship between ShowEntry and Picture models
+- models\show_entry.rb
+  has_many :pictures, :as => :attachable, :dependent => :destroy
+  accepts_nested_attributes_for :pictures, :allow_destroy => true
+
+- Updated controllers\show_entries_controller.rb
+Add :pictures_attributes => [:id, :file, '_destroy'] to the permit()
+
+- Updated views\show_entries\_form.html.erb with nested_form 
+
+- Update views\show_entries\show.html.erb to show upload file in image_tag
+

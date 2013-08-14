@@ -34,6 +34,11 @@
           <strong>Title:</strong>
           <%= @show_entry.title %>
         </p>
+        <p>
+          <% @show_entry.pictures.each do |p| %>
+            <%= image_tag(p.file.url, heigh: 200, width:200) if p.file? %>
+          <% end %>
+        </p>
 
         <%= link_to 'Edit', edit_show_entry_path(@show_entry) %> |
         <%= link_to 'Back', show_entries_path %>

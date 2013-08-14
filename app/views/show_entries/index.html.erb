@@ -15,6 +15,7 @@
                 <th>Points</th>
                 <th>Title</th>
                 <th>Judge</th>
+                <th>Photos</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -32,6 +33,7 @@
                   <td><%= show_entry.points %></td>
                   <td><%= show_entry.title %></td>
                   <td><%= show_entry.judge %></td>
+                  <td><%= show_entry.pictures.size %></td>  
                   <td><%= link_to 'Show', show_entry %></td>
                   <td><%= link_to 'Edit', edit_show_entry_path(show_entry) %></td>
                   <td><%= link_to 'Destroy', show_entry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -42,7 +44,7 @@
                 <td><%= number_to_currency(@show_entries.map(&:entry_fee).sum) %></td>
                 <td><%= number_to_currency(@show_entries.map(&:handling_fee).sum )%></td>
                 <td><%= number_to_currency(@show_entries.map(&:expense).sum) %></td>
-                <td><%= @show_entries.map(&:points).sum %></td>
+                <td><%= @show_entries.map(&:points).sum %></td><td>&nbsp;</td>
                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                 <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>

@@ -7,12 +7,12 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Full name</th>
                 <th>Call name</th>
                 <th>Birthday</th>
                 <th>Sex</th>
                 <th>Registration no</th>
-                <th></th>
+                <th>Photos</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -27,7 +27,7 @@
                   <td><%= dog.birthday %></td>
                   <td><%= dog.sex %></td>
                   <td><%= dog.registration_no %></td>
-                  <td><%= dog.pictures[0].inspect%></td>
+                  <td><%= dog.pictures.size%></td>
                   <td><%= link_to 'Show', dog %></td>
                   <td><%= link_to 'Edit', edit_dog_path(dog) %></td>
                   <td><%= link_to 'Destroy', dog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
