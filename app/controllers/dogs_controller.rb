@@ -15,6 +15,8 @@ class DogsController < ApplicationController
   # GET /dogs/new
   def new
     @dog = Dog.new
+    @bitches = Dog.where(sex: 'Female')
+    @dogs = Dog.where(sex: 'Male')
   end
 
   # GET /dogs/1/edit
@@ -69,6 +71,6 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :call_name, :birthday, :sex, :registration_no, :pictures_attributes => [:id, :file, '_destroy'])
+      params.require(:dog).permit(:name, :call_name, :birthday, :sex, :registration_no, :sire_id, :dams_id, :pictures_attributes => [:id, :file, '_destroy'])
     end
 end

@@ -314,3 +314,52 @@ $ ->
  has_many :payments, :dependent => :destroy
 
 - Added show dog photos on the sale\show.html.erb page
+
+== Generate migration script to add sire_id and dams_id to dog model
+$ rails g migration add_sire_id_and_dams_id_to_dog sire_id:integer dams_id:integer
+
+-- Updated views\dogs\ all file to add sire_id and dams_id to view files
+
+-- Updated models\dog.rb add relationship for Sire and Dams on the model
+belongs_to :sire, class_name: "Dog", foreign_key: "sire_id"
+belongs_to :dams, class_name: "Dog", foreign_key: "dams_id"
+
+-- Updated controllers\dogs_controller.rb add sire_id and dams_id attributes to permint() method
+
+def new
+	@dog = Dog.new
+	@bitches = Dog.where(sex: 'Female')
+	@dogs = Dog.where(sex: 'Male')
+end
+
+== Added image upload for customer model
+
+-- Updated models\customer.rb to add the relationship between customer and picture models
+
+has_many :pictures, :as => :attachable, :dependent => :destroy
+accepts_nested_attributes_for :pictures, :allow_destroy => true
+
+-- Updated controllers\customers_controller.rb
+added :pictures_attributes => [:id, :file, '_destroy'] to permit()
+
+-- Updated views\customers\_form.html.erb with nested_form
+	<%= nested_form_for(@customer, :html => {:multipart => true}) do |f| %>
+
+	<div class="field">
+	    <%= f.fields_for :pictures do |p| %>
+	      <%= image_tag(p.object.file.url, height: 200, width: 200) %>
+	      <%= p.label :file %>
+	      <%= p.file_field :file %>
+	      <%= p.link_to_remove t('.remove_image') %>
+	    <% end %>
+	    <%= f.link_to_add t('.add_image'), :pictures %>
+  	</div>
+
+-- Update views\customers\all file to display upload images
+
+
+== Added Bootstrap tab to customers\show.html.erb page to display customer related information, such as sales and basic contact information
+
+-- Added 3 tabs for Customer Basic Information, Purchase History, and Other
+
+

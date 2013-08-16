@@ -20,6 +20,14 @@
     <%= f.text_field :call_name %>
   </div>
   <div class="field">
+    <%= f.label :Sire %><br>
+    <%= f.select(:sire_id, @dogs.all.map{|d|[d.name,d.id]}, include_blank: 'Select a Dog') %>
+  </div>
+  <div class="field">
+    <%= f.label :Dams %><br>
+    <%= f.select(:dams_id, @bitches.all.map{|b|[b.name,b.id]}, include_blank: 'Select a Bitch') %>
+  </div>  
+  <div class="field">
     <%= f.label :birthday %><br>
     <%= f.date_select :birthday %>
   </div>

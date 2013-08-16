@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130812200817) do
+ActiveRecord::Schema.define(version: 20130815155303) do
 
   create_table "charges", force: true do |t|
     t.string   "name"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20130812200817) do
     t.string   "registration_no"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sire_id"
+    t.integer  "dams_id"
   end
 
   create_table "payment_statuses", force: true do |t|
