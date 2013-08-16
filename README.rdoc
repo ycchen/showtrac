@@ -374,5 +374,30 @@ $ rails g scaffold pregnancy dog:references heat_start_date:date due_date:date s
 == Added mating model
 $ rails g scaffold mating pregnancy:references mating_date:date sire_id
 
+- added relationship between Pregnancy and Mating model
+
+- models\pregnancy.rb
+has_many :matings
+
+- models\mating.rb
+belongs_to :pregnancy
+
+# this is relationship allow Mating model to reference :sire back to Dog model
+belongs_to :sire, class_name: "Dog", foreign_key: "sire_id"
+
 == Added litter model
 $ rails g scaffold litter pregnancy:references gender:string color:references survival:boolean
+
+== Generate migration script to add dog_id to litter model
+$ rails g migration add_dog_id_to_litter dog:references
+
+== Generate migration script to add progesterone to Mating model
+$ rails g migration add_progesterone_to_mating progesterone:decimal
+
+/*
+collection_radio_buttons(:item, :owner_id, Owner.all, :id, :name)
+m:m = > collection_check_boxes(:item, :owner_id, Owner.all, :id, :name)
+
+f.date_field :reurn_date
+
+*/

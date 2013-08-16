@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130816040226) do
+ActiveRecord::Schema.define(version: 20130816213228) do
 
   create_table "charges", force: true do |t|
     t.string   "name"
@@ -77,9 +77,11 @@ ActiveRecord::Schema.define(version: 20130816040226) do
     t.boolean  "survival",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "dog_id"
   end
 
   add_index "litters", ["color_id"], name: "index_litters_on_color_id"
+  add_index "litters", ["dog_id"], name: "index_litters_on_dog_id"
   add_index "litters", ["pregnancy_id"], name: "index_litters_on_pregnancy_id"
 
   create_table "matings", force: true do |t|
@@ -88,6 +90,7 @@ ActiveRecord::Schema.define(version: 20130816040226) do
     t.string   "sire_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "progesterone", precision: 8, scale: 2, default: 0.0
   end
 
   add_index "matings", ["pregnancy_id"], name: "index_matings_on_pregnancy_id"
