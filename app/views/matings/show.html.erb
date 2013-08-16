@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pregnancy:</strong>
+  <%= @mating.pregnancy %>
+</p>
+
+<p>
+  <strong>Mating date:</strong>
+  <%= @mating.mating_date %>
+</p>
+
+<p>
+  <strong>Sire:</strong>
+  <%= @mating.sire_id %>
+</p>
+
+<%= link_to 'Edit', edit_mating_path(@mating) %> |
+<%= link_to 'Back', matings_path %>

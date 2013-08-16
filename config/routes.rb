@@ -1,4 +1,12 @@
 Showtrac::Application.routes.draw do
+  resources :litters
+
+  resources :matings
+
+  resources :pregnancies
+
+  resources :colors
+
   resources :photos
 
   resources :payment_statuses

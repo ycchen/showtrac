@@ -1,0 +1,29 @@
+<%= form_for(@mating) do |f| %>
+  <% if @mating.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mating.errors.count, "error") %> prohibited this mating from being saved:</h2>
+
+      <ul>
+      <% @mating.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pregnancy %><br>
+    <%= f.text_field :pregnancy %>
+  </div>
+  <div class="field">
+    <%= f.label :mating_date %><br>
+    <%= f.date_select :mating_date %>
+  </div>
+  <div class="field">
+    <%= f.label :sire_id %><br>
+    <%= f.text_field :sire_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

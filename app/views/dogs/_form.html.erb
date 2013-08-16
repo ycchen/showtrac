@@ -20,6 +20,11 @@
     <%= f.text_field :call_name %>
   </div>
   <div class="field">
+    <%= f.label :color_id %><br>
+    <%= f.select(:color_id, Color.all.map{|c| [c.name, c.id]}, :include_blank => 'Select a Color') %>
+  </div>
+  
+  <div class="field">
     <%= f.label :Sire %><br>
     <%= f.select(:sire_id, @dogs.all.map{|d|[d.name,d.id]}, include_blank: 'Select a Dog') %>
   </div>

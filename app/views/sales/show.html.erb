@@ -3,9 +3,12 @@
     <div class="span12">
       <div class="grey-box">
       <p id="notice"><%= notice %></p>
+        <h4>Sale Details</h4>
+
       <% @sale.dog.pictures.each do |pic| %>
         <%= image_tag(pic.file.url, heigh: 200, width: 200) %>
       <% end %>
+      
       <p>
         <strong>Dog:</strong>
         <%= @sale.dog.name %>
@@ -46,15 +49,15 @@
         </table>
       </p>
 
-      <p class="flip">Add Payment</p>
-      <a href="#" onclick="javascript:$('.panel').slideToggle('slow')" >Add Payment</a>
+      <a href="javascript:void(0)" onclick="javascript:$('.panel').slideToggle('slow')" class="btn btn-primary">Add Payment</a>
+
       <div class="panel">
-        <h3>Add Payment</h3>
+        <h4>Add Payment</h4>
         <%= render 'payments/form' %>
       </div>
 
-      <%= link_to 'Edit', edit_sale_path(@sale) %> |
-      <%= link_to 'Back', sales_path %>
+      <%= link_to 'Edit', edit_sale_path(@sale), class: 'btn' %>
+      <%= link_to 'Back', sales_path,class: 'btn' %>
       </div>
     </div>
   </div>

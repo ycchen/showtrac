@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pregnancy:</strong>
+  <%= @litter.pregnancy %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @litter.gender %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @litter.color %>
+</p>
+
+<p>
+  <strong>Survival:</strong>
+  <%= @litter.survival %>
+</p>
+
+<%= link_to 'Edit', edit_litter_path(@litter) %> |
+<%= link_to 'Back', litters_path %>

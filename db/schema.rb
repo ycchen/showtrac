@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815155303) do
+ActiveRecord::Schema.define(version: 20130816040226) do
 
   create_table "charges", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "colors", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,7 +65,32 @@ ActiveRecord::Schema.define(version: 20130815155303) do
     t.datetime "updated_at"
     t.integer  "sire_id"
     t.integer  "dams_id"
+    t.integer  "color_id"
   end
+
+  add_index "dogs", ["color_id"], name: "index_dogs_on_color_id"
+
+  create_table "litters", force: true do |t|
+    t.integer  "pregnancy_id"
+    t.string   "gender"
+    t.integer  "color_id"
+    t.boolean  "survival",     default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "litters", ["color_id"], name: "index_litters_on_color_id"
+  add_index "litters", ["pregnancy_id"], name: "index_litters_on_pregnancy_id"
+
+  create_table "matings", force: true do |t|
+    t.integer  "pregnancy_id"
+    t.date     "mating_date"
+    t.string   "sire_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "matings", ["pregnancy_id"], name: "index_matings_on_pregnancy_id"
 
   create_table "payment_statuses", force: true do |t|
     t.string   "name"
@@ -95,6 +126,18 @@ ActiveRecord::Schema.define(version: 20130815155303) do
   end
 
   add_index "pictures", ["attachable_id", "attachable_type"], name: "index_pictures_on_attachable_id_and_attachable_type"
+
+  create_table "pregnancies", force: true do |t|
+    t.integer  "dog_id"
+    t.date     "heat_start_date"
+    t.date     "due_date"
+    t.date     "surgery_date"
+    t.integer  "total_puppy"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pregnancies", ["dog_id"], name: "index_pregnancies_on_dog_id"
 
   create_table "sales", force: true do |t|
     t.integer  "dog_id"

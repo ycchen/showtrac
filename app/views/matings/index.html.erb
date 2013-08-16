@@ -1,0 +1,31 @@
+<h1>Listing matings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Pregnancy</th>
+      <th>Mating date</th>
+      <th>Sire</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matings.each do |mating| %>
+      <tr>
+        <td><%= mating.pregnancy %></td>
+        <td><%= mating.mating_date %></td>
+        <td><%= mating.sire_id %></td>
+        <td><%= link_to 'Show', mating %></td>
+        <td><%= link_to 'Edit', edit_mating_path(mating) %></td>
+        <td><%= link_to 'Destroy', mating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mating', new_mating_path %>

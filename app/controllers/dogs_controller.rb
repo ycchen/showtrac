@@ -10,17 +10,18 @@ class DogsController < ApplicationController
   # GET /dogs/1
   # GET /dogs/1.json
   def show
+    get_parents
   end
 
   # GET /dogs/new
   def new
     @dog = Dog.new
-    @bitches = Dog.where(sex: 'Female')
-    @dogs = Dog.where(sex: 'Male')
+    get_parents
   end
 
   # GET /dogs/1/edit
   def edit
+    get_parents
   end
 
   # POST /dogs
@@ -71,6 +72,12 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :call_name, :birthday, :sex, :registration_no, :sire_id, :dams_id, :pictures_attributes => [:id, :file, '_destroy'])
+      params.require(:dog).permit(:name, :call_name, :birthday, :sex, :registration_no, :sire_id, :dams_id, :color_id,:pictures_attributes => [:id, :file, '_destroy'])
+    end
+
+    #
+    def get_parents
+      @bitches = Dog.where(sex: 'Female')
+      @dogs = Dog.where(sex: 'Male')
     end
 end

@@ -4,7 +4,8 @@ class Dog < ActiveRecord::Base
 	has_many :dog_expenses
 	has_many :sales
 	has_many :photos
-
+	belongs_to :color
+	
 	belongs_to :sire, class_name: "Dog", foreign_key: "sire_id"
 	belongs_to :dams, class_name: "Dog", foreign_key: "dams_id"
 

@@ -362,4 +362,17 @@ added :pictures_attributes => [:id, :file, '_destroy'] to permit()
 
 -- Added 3 tabs for Customer Basic Information, Purchase History, and Other
 
+== Added migration script to create color model
+$ rails g scaffold color name:string
 
+== Added migriation script to add color to dog model
+$ rails g migration add_color_id_to_dog color:references
+
+== Added pregnancy model
+$ rails g scaffold pregnancy dog:references heat_start_date:date due_date:date surgery_date:date total_puppy:integer
+
+== Added mating model
+$ rails g scaffold mating pregnancy:references mating_date:date sire_id
+
+== Added litter model
+$ rails g scaffold litter pregnancy:references gender:string color:references survival:boolean
